@@ -1,0 +1,18 @@
+timeout_api:
+  build: .
+  volumes:
+    - .:/app
+    - /app/node_modules
+  environment:
+    JWT_SECRET: Ba(0/\/
+    RETHINKDB_URL: rethinkdb://rethinkdb:28015/timeout_api
+    PORT: 3005
+    LOG_LEVEL: warn
+    HASH_ROUNDS: 10
+  ports:
+    - 3005:3005
+  links:
+    - rethinkdb
+
+rethinkdb:
+  image: rethinkdb:latest

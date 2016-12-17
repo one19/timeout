@@ -1,0 +1,65 @@
+{
+  "type": "object",
+  "name": "timer",
+  "pluralName": "timers",
+  "properties": {
+    "id": {
+      "$ref": "#/definitions/uuid"
+    },
+    "name": {
+      "type": "string",
+      "faker": "name.findName"
+    },
+    "description" : {
+      "description": "extra input for more in-depth description of timer, handles links",
+      "type": "string",
+      "faker": "internet.url"
+    },
+    "createdAt": {
+      "$ref": "#/definitions/date-time"
+    },
+    "updatedAt": {
+      "$ref": "#/definitions/date-time"
+    },
+    "creationTime": {
+      "description": "moment in ms that the timer was created, valid for the next 1000 years",
+      "type": "integer",
+      "minimum": 1481918421722,
+      "maximum": 33039518421722
+    },
+    "creationOffset": {
+      "description": "utcOffset stored from user's creationTime creation, in minutes",
+      "type": "integer",
+      "minimum": -1560,
+      "maximum": 1560
+    },
+    "endTime": {
+      "description": "moment in ms from start until timer finish",
+      "type": "integer",
+      "minimum": 1481918421722,
+      "maximum": 33039518421722
+    },
+    "expired": {
+      "description": "whether or not this timer has expired",
+      "type": "boolean"
+    },
+    "surprise": {
+      "description": "array of the date properties that should be surprising",
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 7,
+      "items": {
+        "enum": [
+          "year",
+          "month",
+          "date",
+          "hour",
+          "minute",
+          "second",
+          "millisecond"
+        ]
+      }
+    }
+  },
+  "required": ["name", "creationTime", "creationOffset", "endTime", "expired", "surprise"]
+}
