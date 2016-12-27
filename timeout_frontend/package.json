@@ -6,7 +6,8 @@
   "scripts": {
     "start": "if [ \"$NODE_ENV\" = \"production\" ]; then fin-serve; else node server.js; fi",
     "build": "NODE_ENV='production' webpack -p",
-    "analyze-size": "./node_modules/.bin/webpack --json | webpack-bundle-size-analyzer > ./coverage/distribution.txt"
+    "analyze-size": "./node_modules/.bin/webpack --json | webpack-bundle-size-analyzer > ./coverage/distribution.txt",
+    "analyze-prod": "NODE_ENV='production' webpack -p --json | webpack-bundle-size-analyzer > ./coverage/prod.txt"
   },
   "keywords": [
     "timer",
