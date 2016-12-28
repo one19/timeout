@@ -1,12 +1,11 @@
 FROM node:6.9
-ENV NPM_CONFIG_LOGLEVEL=warn
-RUN npm install -g yarn
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 
-WORKDIR /app
+WORKDIR /timeout_api
 
-COPY ./package.json /app
+COPY ./package.json /timeout_api
 
-RUN NODE_ENV=null yarn install
+RUN NODE_ENV=null $HOME/.yarn/bin/yarn install
 
-ADD . /app
+ADD . /timeout_api
 RUN touch .env

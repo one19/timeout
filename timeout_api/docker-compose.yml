@@ -1,18 +1,32 @@
-timeout_api:
-  build: .
-  volumes:
-    - .:/app
-    - /app/node_modules
-  environment:
-    JWT_SECRET: Ba(0/\/
-    RETHINKDB_URL: rethinkdb://rethinkdb:28015/timeout_api
-    PORT: 3005
-    LOG_LEVEL: warn
-    HASH_ROUNDS: 10
-  ports:
-    - 3005:3005
-  links:
-    - rethinkdb
+version: '2'
 
-rethinkdb:
-  image: rethinkdb:latest
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/timeout_api
+      - /timeout_api/node_modules
+    environment:
+      JWT_SECRET: Ba(0/\/
+      RETHINKDB_URL: rethinkdb://rethinkdb:28015/timeout_api
+      PORT: 3005
+      LOG_LEVEL: warn
+      HASH_ROUNDS: 10
+    ports:
+      - 3005:3005
+    command: npm start
+  rethinkdb:
+    image: rethinkdb:latest
+
+  timeout_api:
+    extends: api
+    depends_on:
+      - rethinkdb
+
+  timeout_api_test:
+    extends: api
+    command: npm test
+    depends_on:
+      - rethinkdb

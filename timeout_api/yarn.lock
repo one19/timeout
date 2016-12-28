@@ -973,7 +973,7 @@ httperrors@^2.1.0:
   dependencies:
     createerror "1.1.0"
 
-husky@^0.11.6:
+husky@^0.11.9:
   version "0.11.9"
   resolved "https://registry.yarnpkg.com/husky/-/husky-0.11.9.tgz#28cd1dc16bffdca1d4d93592814e5f3c327b38ee"
   dependencies:
