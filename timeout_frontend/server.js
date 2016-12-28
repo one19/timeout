@@ -14,9 +14,9 @@ new WebpackDevServer(webpack(config), {
   historyApiFallback: true
 }).listen(PORT, 'localhost', (err, result) => {
   if (err) {
-    return console.log('ERROR:', err);
+    return console.log('ERROR:', err); // eslint-disable-line
   }
 
-  console.log(`Listening at http://localhost:${PORT}/\nENV: ${NODE_ENV}`);
+  console.log(`Listening at http://localhost:${PORT}/\nENV: ${NODE_ENV}`); //eslint-disable-line
   return result;
 });
