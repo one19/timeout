@@ -30,4 +30,12 @@ function convertObject(value) {
   return clone;
 }
 
+function sortById(arra) {
+  return arra.sort((a, b) => {
+    if (a.id > b.id) return 1;
+    return -1;
+  });
+}
+
+exports.sortById = sortById;
 exports.nullToUndefined = convert;
