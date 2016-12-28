@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/timeout_frontend
+      - /timeout_frontend/node_modules
+      - /timeout_frontned/dist
+    ports:
+      - 9001:9001
+    command: npm start
+
+  timeout_frontend_test:
+    extends: frontend
+    command: npm test
+
+  timeout_frontend_prod:
+    extends: frontend
+    environment:
+      NODE_ENV: production
+    ports:
+      - 8000:8000
+    command: npm start
+
