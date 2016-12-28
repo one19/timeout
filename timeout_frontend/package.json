@@ -11,6 +11,7 @@
     "precommit": "npm run lint",
     "test": "NODE_ENV=test mocha",
     "cover": "babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- test --recursive",
+    "see-cover": "cd coverage/lcov-report && python -m SimpleHTTPServer 8000",
     "analyze-dev": "./node_modules/.bin/webpack --json | webpack-bundle-size-analyzer > ./coverage/distribution.txt",
     "analyze-prod": "NODE_ENV='production' webpack -p --json | webpack-bundle-size-analyzer > ./coverage/prod.txt"
   },
