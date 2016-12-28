@@ -1,4 +1,4 @@
-# Welcome To Breadbeard API
+# Welcome To Timeout API
 
 It's the api for timeout! It's got users and timers! That's IT!
 
