@@ -4,6 +4,7 @@ const autoprefixer = require('autoprefixer');
 const postcssUnits = require('postcss-units');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 const {
   NODE_ENV = 'development',
@@ -62,7 +63,8 @@ const config = {
 };
 
 if (NODE_ENV === 'development') {
-  config.entry.push(`webpack-dev-server/client?http://0.0.0.0:${PORT}`, // WebpackDevServer host and port
+  // WebpackDevServer host and port
+  config.entry.push(`webpack-dev-server/client?http://0.0.0.0:${PORT}`,
     'webpack/hot/only-dev-server'); // "only" prevents reload on syntax errors)
   config.module.loaders.push(
     { test: /\.js$/, exclude: /node_modules/, loaders: ['react-hot', 'babel-loader'] },
@@ -78,6 +80,15 @@ if (NODE_ENV === 'development') {
   );
   config.plugins.push(
     new ExtractTextPlugin('app.css', { allChunks: true }),
+    /* This plugin is a landmine waiting to explode. However, it strips methods from lodash
+    * It's really nice to get a goodly amount of memory savings (10k). All methods:
+    * shorthands: true, cloning: true, currying: true, caching: true, collections: true,
+    * exotics: true, guards: true, metadata: true, deburring: true, unicode: true, chaining:
+    * true, memoizing: true, coercions: true, flattening: true, paths: true, placeholders: true
+    *
+    * If a function mysteriously goes missing in prod build, try replacing some!
+    */
+    new LodashModuleReplacementPlugin({ shorthands: true, collections: true }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({

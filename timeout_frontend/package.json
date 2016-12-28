@@ -6,7 +6,8 @@
   "scripts": {
     "start": "if [ \"$NODE_ENV\" = \"production\" ]; then fin-serve; else node server.js; fi",
     "build": "NODE_ENV='production' webpack -p",
-    "analyze-size": "./node_modules/.bin/webpack --json | webpack-bundle-size-analyzer > ./coverage/distribution.txt",
+    "postbuild": "npm run analyze-dev && npm run analyze-prod",
+    "analyze-dev": "./node_modules/.bin/webpack --json | webpack-bundle-size-analyzer > ./coverage/distribution.txt",
     "analyze-prod": "NODE_ENV='production' webpack -p --json | webpack-bundle-size-analyzer > ./coverage/prod.txt"
   },
   "keywords": [
@@ -34,6 +35,7 @@
     "fin-serve": "^1.0.3",
     "html-webpack-plugin": "^2.24.0",
     "istanbul": "^0.4.5",
+    "lodash-webpack-plugin": "^0.10.6",
     "mocha": "^3.2.0",
     "postcss": "^5.2.8",
     "postcss-loader": "^0.9.1",
