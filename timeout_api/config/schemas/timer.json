@@ -6,6 +6,10 @@
     "id": {
       "$ref": "#/definitions/uuid"
     },
+    "userId": {
+      "description": "the id of the user that this timer belongs to",
+      "$ref": "#/definitions/uuid"
+    },
     "name": {
       "type": "string",
       "faker": "name.findName"
@@ -61,5 +65,5 @@
       }
     }
   },
-  "required": ["name", "creationTime", "creationOffset", "endTime", "expired", "surprise"]
+  "required": ["name", "userId", "creationTime", "creationOffset", "endTime", "expired", "surprise"]
 }
