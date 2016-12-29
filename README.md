@@ -1,4 +1,6 @@
 #TIMEOUT
+
+[![Build status](https://badge.buildkite.com/26dab75aa80d4db24419df0bd6f4ddf809d88fd73289453091.svg?branch=master)](https://buildkite.com/the-hoard/timeout)
 ---------------
 ###Description:
 Timeout is a small shitty react app designed to introduce randomness into your life.
@@ -8,8 +10,6 @@ I don't think it'll need redux
 
 ---------------
 ###Goals:
-0. Add coverage to api side
-1. Add CI
 2. Codecov coverage reporting
 3. Get a working sign-in bar
 4. Get a working timer selector
