@@ -9,7 +9,6 @@ services:
       - .:/timeout_frontend
       - /timeout_frontend/node_modules
       - /timeout_frontend/dist
-      - /timeout_frontend/coverage
     ports:
       - 9001:9001
     command: npm start
