@@ -1,0 +1,12 @@
+#!/bin/bash
+
+case "$BUILDKITE_COMMAND" in
+  api)
+    cd timeout_api
+    export BUILDKITE_COMMAND='npm run coverage && npm run lint'
+    ;;
+  frontend)
+    cd timeout_frontend
+    export BUILDKITE_COMMAND='npm run cover && npm run lint'
+    ;;
+esac
