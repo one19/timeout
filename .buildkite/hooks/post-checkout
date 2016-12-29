@@ -1,0 +1,3 @@
+mdecrypt --keyfile /var/lib/buildkite-agent/super_secret_key codacy_key.nc
+export $(cat codacy_key | xargs)
+rm codacy_key

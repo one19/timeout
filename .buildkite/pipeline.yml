@@ -1,0 +1,14 @@
+steps:
+  - name: "api"
+    artifact_paths: "./coverage/*"
+    command: "api"
+    env:
+      BUILDKITE_DOCKER_COMPOSE_CONTAINER: "timeout_api"
+  - name: "frontend"
+    artifact_paths: "./coverage/*"
+    command: "frontend"
+    env:
+      BUILDKITE_DOCKER_COMPOSE_CONTAINER: "frontend"
+  - wait
+  - name: coverage
+    command: coverage
