@@ -9,3 +9,6 @@ steps:
     command: "frontend"
     env:
       BUILDKITE_DOCKER_COMPOSE_CONTAINER: "frontend"
+  - wait
+  - name: coverage
+    command: coverage
