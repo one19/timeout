@@ -1,6 +1,7 @@
 #TIMEOUT
 
-[![Build status](https://badge.buildkite.com/26dab75aa80d4db24419df0bd6f4ddf809d88fd73289453091.svg?branch=master)](https://buildkite.com/the-hoard/timeout)
+[![Build status](https://badge.buildkite.com/26dab75aa80d4db24419df0bd6f4ddf809d88fd73289453091.svg?branch=master)](https://buildkite.com/the-hoard/timeout) [![codecov](https://codecov.io/gh/one19/timeout/branch/master/graph/badge.svg)](https://codecov.io/gh/one19/timeout)
+
 
 ---------------
 ###Description:
