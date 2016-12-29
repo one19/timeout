@@ -9,4 +9,8 @@ case "$BUILDKITE_COMMAND" in
     cd timeout_frontend
     export BUILDKITE_COMMAND='npm run cover && npm run lint'
     ;;
+  coverage)
+    buildkite-agent artifact download timeout_api/coverage --step api timeout_frontend/coverage --step frontend
+    export BUILDKITE_COMMAND="bash <(curl -s https://codecov.io/bash) -t `echo $CODACY_KEY`"
+    ;;
 esac
