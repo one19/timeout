@@ -65,5 +65,5 @@
       }
     }
   },
-  "required": ["name", "userId", "creationTime", "creationOffset", "endTime", "expired", "surprise"]
+  "required": ["name", "userId", "creationTime", "creationOffset", "endTime", "expired", "surprise", "description"]
 }
