@@ -12,7 +12,6 @@ I don't think it'll need redux
 
 ---------------
 ###Goals:
-2. Switch to [styled-components](https://styled-components.com/)
 3. Get a working sign-in bar
 4. Get a working timer selector
 5. Display all timers for the logged-in user
