@@ -1,7 +1,5 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require('autoprefixer');
-const postcssUnits = require('postcss-units');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
@@ -13,8 +11,8 @@ const {
 
 const styleLoader = ['css-loader?',
   'camelCase&modules&importLoaders=1&',
-  'localIdentName=[name]__[local]___[hash:base64:5]',
-  '!postcss-loader'].join('');
+  'localIdentName=[name]__[local]___[hash:base64:5]'
+].join('');
 
 const config = {
   context: `${__dirname}/app`,
@@ -44,10 +42,6 @@ const config = {
       }
     ]
   },
-  postcss: [
-    autoprefixer,
-    postcssUnits
-  ],
   plugins: [
     new FaviconsWebpackPlugin('./images/timeout1.png'),
     new HtmlWebpackPlugin({
@@ -93,7 +87,12 @@ if (NODE_ENV === 'development') {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
-      compress: { warnings: false },
+      compress: {
+        warnings: false,
+        unused: true,
+        dead_code: true,
+        drop_console: true
+      },
       output: { comments: false },
       mangle: true
     }),

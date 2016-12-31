@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import CSSModules from './lib/cssModules';
-import styles from './app.css';
+import DefaultBack from './app.css';
 
 class App extends Component {
   render() {
     return (
-      <div styleName="back">
+      <DefaultBack>
         Test
-      </div>
+      </DefaultBack>
     );
   }
 }
 
-export default CSSModules(App, styles);
+export default App;

@@ -3,16 +3,18 @@ import React from 'react';
 import { shallow, render } from 'enzyme';
 
 import App from '.app/app';
-import stylesClass from '.app/app.css';
+import DefaultBack from '.app/app.css';
 
 describe('<App />', () => {
   it('renders a test component', () => {
     const wrapper = shallow(<App />);
-    expect(wrapper).to.contain.text('Test');
+    expect(wrapper.find('DefaultBack').length).to.eql(1);
   });
 
-  it('renders with the correct styles', () => {
+  it('renders background with the correct className and style', () => {
+    const primitive = render(<DefaultBack />);
     const wrapper = render(<App />);
-    expect(wrapper.html()).to.include(stylesClass.back);
+
+    expect(wrapper.children()[0].attribs.class).to.eql(primitive.children()[0].attribs.class);
   });
 });
