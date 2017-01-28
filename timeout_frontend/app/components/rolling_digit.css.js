@@ -3,11 +3,16 @@ import styled, { keyframes } from 'styled-components';
 
 // TODO: make a prettier bezier up in this ho
 const rollUp = keyframes`
-  from {
+  0% {
     top: 0;
   }
-
-  to {
+  16% {
+    top: 0;
+  }
+  84% {
+    top: -40px;
+  }
+  100% {
     top: -40px;
   }
 `;
