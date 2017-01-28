@@ -8,6 +8,6 @@ const style = {
   bottom: 0,
   width: '100%'
 };
-const DefaultBack = styled.div`${style}`;
+const AppDefault = styled.div`${style}`;
 
-export default DefaultBack;
+export default AppDefault;

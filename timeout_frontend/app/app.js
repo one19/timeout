@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import DefaultBack from './app.css';
+import AppDefault from './app.css';
 
 class App extends Component {
   render() {
     return (
       <DefaultBack>
-        Test
       </DefaultBack>
+      <AppDefault>
+      </AppDefault>
     );
   }
 }
