@@ -13,7 +13,7 @@ describe('<RollingDigit />', () => {
     expect(wrapper.find('RollingDigitDefault').props().children).to.eql(0);
     // it has an ::after element containing the next digit
     expect(wrapper.find('RollingDigitDefault').props().nextValue).to.eql(1);
-    expect(wrapper.find('RollingDigitDefault').props().animPerSecond).to.eql(1);
+    expect(wrapper.find('RollingDigitDefault').props().secondPerAnim).to.eql(1);
   });
 
   it('doesn\'t roll below the minimum given prop', () => {
@@ -34,5 +34,10 @@ describe('<RollingDigit />', () => {
   it('rolls over the nextValue to min when at max', () => {
     const wrapper = shallow(<RollingDigit min={1} max={3} value={3} />);
     expect(wrapper.find('RollingDigitDefault').props().nextValue).to.eql(1);
+  });
+
+  it('renders animationless when given resetAnimation prop', () => {
+    const wrapper = shallow(<RollingDigit resetAnimation={true} />);
+    expect(wrapper.find('RollingDigitDefaultStill').length).to.eql(1);
   });
 });

@@ -33,12 +33,14 @@ const defaultStyle = {
 // create a basic set of styles for the container for our rolling digit
 const defaultContainer = Object.assign({}, defaultStyle, { 'overflow-y': 'hidden' });
 
-// animPerSecond times the animation speed to 19% faster than the timer rate
+// anim/s is slower than 1s because it gets re-rendered on the second, and we're
+// resetting the animation anyway with a second re-render with no animation
 // nextValue renders the ::after content with the number next in the cycle
 export const RollingDigitDefault = styled.div`${defaultStyle}
-  animation: ${rollUp} ${props => props.animPerSecond * 840}ms ease-in-out infinite;
+  animation: ${rollUp} ${props => props.secondPerAnim * 1005}ms ease-in-out infinite;
   &::after {
     content: '${props => props.nextValue}';
     display: block;
   }`;
+export const RollingDigitDefaultStill = styled.div`${defaultStyle}`;
 export const RollingDigitContainerDefault = styled.div`${defaultContainer}`;
