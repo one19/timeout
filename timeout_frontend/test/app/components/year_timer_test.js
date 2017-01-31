@@ -17,8 +17,8 @@ describe('<YearTimer />', () => {
     expect(wrapper.find('DigitRoller').at(5).props().startValue).to.eql(1);
     expect(wrapper.find('DigitRoller').at(6).props().startValue).to.eql(3);
     expect(wrapper.find('DigitRoller').at(7).props().startValue).to.eql(1);
-    expect(wrapper.find('DigitRoller').at(8).props().startValue).to.eql(2);
-    expect(wrapper.find('DigitRoller').at(9).props().startValue).to.eql(3);
+    expect(wrapper.find('DigitRoller').at(8).props().startValue).to.be.within(1, 2);
+    expect(wrapper.find('DigitRoller').at(9).props().startValue).to.be.within(2, 3);
     expect(wrapper.find('DigitRoller').at(10).props().startValue).to.eql(5);
     expect(wrapper.find('DigitRoller').at(11).props().startValue).to.eql(9);
     expect(wrapper.find('DigitRoller').at(12).props().startValue).to.eql(5);
