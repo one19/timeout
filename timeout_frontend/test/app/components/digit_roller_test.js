@@ -6,13 +6,14 @@ import DigitRoller from '.app/components/digit_roller';
 
 describe('<DigitRoller />', () => {
   it('renders correctly given minimal props', () => {
-    const wrapper = mount(<DigitRoller min={3} max={6} secondPer={4} />);
-    expect(wrapper.find('DigitRoller').length).to.eql(1);
-    expect(wrapper.find('RollingDigitContainerDefault').length).to.eql(1);
-    expect(wrapper.find('RollingDigitDefault').length).to.eql(1);
-    // it starts at min
-    expect(wrapper.find('RollingDigitDefault').props().children).to.eql(3);
-    expect(wrapper.find('RollingDigitDefault').props().secondPerAnim).to.eql(4);
+    const wrapper = mount(<DigitRoller secondPer={4} />);
+    // rollingDigitDefaultContainer et all
+    expect(wrapper.children().props()).to.eql({
+      resetAnimation: true,
+      nextValue: 1,
+      secondPerAnim: 4,
+      children: 0
+    });
     // starts a timer as well
     expect(wrapper.find('DigitRoller').root.node.timer).to.be.instanceOf(Object);
     // has a recursively called function that updates the value
@@ -21,12 +22,12 @@ describe('<DigitRoller />', () => {
 
   it('can be given a start value', () => {
     const wrapper = mount(<DigitRoller min={3} max={6} secondPer={4} startValue={5} />);
-    expect(wrapper.state()).to.eql({ tick: 5, resetAnimation: false });
+    expect(wrapper.state()).to.eql({ tick: 5, resetAnimation: true, initDelay: undefined });
   });
 
   it('renders with the correct initial state', () => {
     const wrapper = mount(<DigitRoller min={3} max={6} secondPer={4} />);
-    expect(wrapper.state()).to.eql({ tick: 3, resetAnimation: false });
+    expect(wrapper.state()).to.eql({ tick: 3, resetAnimation: true, initDelay: undefined });
   });
 
   it('listens to state updates, and renders correctly', () => {
