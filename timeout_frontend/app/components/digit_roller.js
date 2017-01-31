@@ -5,19 +5,26 @@ class DigitRoller extends Component {
 
   constructor(props) {
     super(props);
+    const {
+      initDelay,
+      startValue,
+      min
+    } = this.props;
     this.state = {
-      tick: this.props.startValue || props.min,
-      resetAnimation: false
+      initDelay,
+      tick: startValue || min,
+      resetAnimation: true
     };
     this.tick = this.tick.bind(this);
   }
   componentDidMount() {
-    this.timer = setInterval(this.tick, this.props.secondPer * 1000);
+    if (this.props.secondPer * 1000 > 2147483647) return;
+    this.firstSet = this.state.initDelay || this.props.secondPer;
+    this.timer = setInterval(this.tick, (this.state.initDelay || this.props.secondPer) * 1000);
   }
   componentWillUnmount() {
     clearInterval(this.timer);
   }
-
   tick() {
     const {
       min,
@@ -25,10 +32,12 @@ class DigitRoller extends Component {
     } = this.props;
     const defaultMin = min || 0;
     const defaultMax = max || 9;
+
     const { tick } = this.state;
-    this.setState({ tick: value, resetAnimation: true });
-    setTimeout(this.setState({ tick: value, resetAnimation: false }), 2);
+    this.setState({ tick, resetAnimation: false });
     const value = (tick + 1 > defaultMax) ? defaultMin : tick + 1;
+    // start the animation juuuust before 1 second before when it's supposed to turn
+    setTimeout(() => this.setState({ tick: value, resetAnimation: true }), 950);
   }
 
   props: {
@@ -36,6 +45,7 @@ class DigitRoller extends Component {
     max: ?number;
     secondPer: number;
     startValue: ?number;
+    initDelay: ?number;
   };
 
   render() {
@@ -46,6 +56,16 @@ class DigitRoller extends Component {
     } = this.props;
     const defaultMin = min || 0;
     const defaultMax = max || 9;
+
+    // this is a bit gross. But we need a way to reset the intial timer to the full interval
+    // TODO: fix issue where the component is mounted soon before tick, so it
+    // re-renders every second with a broken looping animation; never
+    // resetting to the right state
+    if (this.firstSet < this.props.secondPer) {
+      this.firstSet = this.props.secondPer;
+      clearInterval(this.timer);
+      this.timer = setInterval(this.tick, this.props.secondPer * 1000);
+    }
 
     return (
       <RollingDigit

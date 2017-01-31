@@ -15,6 +15,7 @@ describe('<DigitRoller />', () => {
     expect(wrapper.find('RollingDigitDefault').props().secondPerAnim).to.eql(4);
     // starts a timer as well
     expect(wrapper.find('DigitRoller').root.node.timer).to.be.instanceOf(Object);
+    // has a recursively called function that updates the value
     expect(wrapper.find('DigitRoller').root.node.tick).to.be.instanceOf(Function);
   });
 
