@@ -23,15 +23,17 @@ class DigitRoller extends Component {
       min,
       max
     } = this.props;
+    const defaultMin = min || 0;
+    const defaultMax = max || 9;
     const { tick } = this.state;
-    const value = (tick + 1 > max) ? min : tick + 1;
     this.setState({ tick: value, resetAnimation: true });
     setTimeout(this.setState({ tick: value, resetAnimation: false }), 2);
+    const value = (tick + 1 > defaultMax) ? defaultMin : tick + 1;
   }
 
   props: {
-    min: number;
-    max: number;
+    min: ?number;
+    max: ?number;
     secondPer: number;
     startValue: ?number;
   };
@@ -42,11 +44,13 @@ class DigitRoller extends Component {
       max,
       secondPer
     } = this.props;
+    const defaultMin = min || 0;
+    const defaultMax = max || 9;
 
     return (
       <RollingDigit
-        min={min}
-        max={max}
+        min={defaultMin}
+        max={defaultMax}
         value={this.state.tick}
         secondPerAnim={secondPer}
         resetAnimation={this.state.resetAnimation}
