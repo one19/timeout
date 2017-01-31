@@ -15,19 +15,3 @@ class App extends Component {
 }
 
 export default App;
-
-        // <RollingDigit animPerSecond={1} />
-        // <br />
-        // <br />
-        // <br />
-        // <br />
-        // <DigitRoller
-        //   min={0}
-        //   max={9}
-        //   secondPer={1}
-        //   startValue={5}
-        // />
-        // <br />
-        // <br />
-        // <br />
-        // <br />

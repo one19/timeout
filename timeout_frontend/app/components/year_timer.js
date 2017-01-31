@@ -15,11 +15,11 @@ class YearTimer extends Component {
     const { date } = this.props;
     const safeDate = new Date(date);
 
-    const year = safeDate.getFullYear().toString().split('');
+    const year = safeDate.getFullYear().toString().split('').map(e => Number(e));
     const months = [31, (Number(year.join('')) % 4 === 0) ? 29 : 28,
       31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     const month = leftPad((safeDate.getMonth() + 1).toString());
-    const currentMonth = months[Number(month.join(''))];
+    const currentMonth = months[Number(month.join('')) - 1];
     const currentMonthMax = Number(currentMonth.toString().slice(0, 1));
     const firstNine = months.slice(0, 9).reduce((a, b) => a + b, 0);
     const lastThree = months.slice(9, 12).reduce((a, b) => a + b, 0);
@@ -71,7 +71,7 @@ class YearTimer extends Component {
           startValue={year[2]}
         />
         <DigitRoller
-          secondPer={365.24 * 24 * 60 * 60}
+          secondPer={365.25 * 24 * 60 * 60}
           startValue={year[3]}
         />
         -
