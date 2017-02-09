@@ -8,6 +8,7 @@ services:
     volumes:
       - .:/timeout_api
       - /timeout_api/node_modules
+      - /timeout_api/.env
     environment:
       JWT_SECRET: Ba(0/\/
       RETHINKDB_URL: rethinkdb://rethinkdb:28015/timeout_api

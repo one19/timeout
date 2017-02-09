@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+const styled = require('styled-components');
+// TODO: SWITCH BACK TO THIS SHIT WHEN WEBPACK FIXES ITSELF
+// import styled from 'styled-components';
 
 // create a basic set of style properties for our 'clock'
 const defaultStyle = {
@@ -11,4 +13,4 @@ const defaultStyle = {
   'vertical-align': 'middle'
 };
 
-export const TimerWrapperDefault = styled.div`${defaultStyle}`;
+export const TimerWrapperDefault = styled.default.div`${defaultStyle}`;

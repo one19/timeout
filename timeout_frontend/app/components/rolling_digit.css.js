@@ -1,4 +1,9 @@
-import styled, { keyframes } from 'styled-components';
+import { keyframes } from 'styled-components';
+
+const styled = require('styled-components');
+// TODO: SWITCH BACK TO THIS SHIT WHEN WEBPACK FIXES ITSELF
+// import styled, { keyframes } from 'styled-components';
+
 // TODO make a small setup, and a large. Do it SMART
 
 // TODO: make a prettier bezier up in this ho
@@ -42,11 +47,11 @@ const defaultContainer = {
 // anim/s is slower than 1s because it gets re-rendered on the second, and we're
 // resetting the animation anyway with a second re-render with no animation
 // nextValue renders the ::after content with the number next in the cycle
-export const RollingDigitDefault = styled.div`${defaultStyle}
+export const RollingDigitDefault = styled.default.div`${defaultStyle}
   animation: ${rollUp} ${props => ((props.secondPerAnim < 1) ? props.secondPerAnim * 1005 : 1005)}ms ease-in-out infinite;
   &::after {
     content: '${props => props.nextValue}';
     display: block;
   }`;
-export const RollingDigitDefaultStill = styled.div`${defaultStyle}`;
-export const RollingDigitContainerDefault = styled.div`${defaultContainer}`;
+export const RollingDigitDefaultStill = styled.default.div`${defaultStyle}`;
+export const RollingDigitContainerDefault = styled.default.div`${defaultContainer}`;

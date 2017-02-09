@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+const styled = require('styled-components');
+// TODO: SWITCH BACK TO THIS SHIT WHEN WEBPACK FIXES ITSELF
+// import styled from 'styled-components';
 
 // create a Back component
 const style = {
@@ -8,6 +10,7 @@ const style = {
   bottom: 0,
   width: '100%'
 };
-const AppDefault = styled.div`${style}`;
+
+const AppDefault = styled.default.div`${style}`;
 
 export default AppDefault;

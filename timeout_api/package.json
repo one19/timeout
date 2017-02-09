@@ -15,7 +15,7 @@
     "start": "./bin/server",
     "test": "NODE_ENV=test mocha",
     "coverage": "NODE_ENV=test istanbul cover _mocha",
-    "docker": "docker-compose up timeout_api",
+    "docker": "docker-compose up timeout_api || true",
     "postdocker": "docker-compose down",
     "dockertest": "docker-compose -p test up timeout_api_test",
     "postdockertest": "docker-compose -p test down",

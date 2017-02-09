@@ -61,7 +61,7 @@ if (NODE_ENV === 'development') {
   config.entry.push(`webpack-dev-server/client?http://0.0.0.0:${PORT}`,
     'webpack/hot/only-dev-server'); // "only" prevents reload on syntax errors)
   config.module.loaders.push(
-    { test: /\.js$/, exclude: /node_modules/, loaders: ['react-hot', 'babel-loader'] },
+    { test: /\.js$/, exclude: /node_modules/, loaders: ['react-hot-loader', 'babel-loader'] },
     { test: /\.css$/, loader: `style-loader!${styleLoader}` }
   );
   config.plugins.push(
