@@ -9,4 +9,4 @@ COPY ./package.json /timeout_api
 RUN NODE_ENV=null $HOME/.yarn/bin/yarn install
 
 ADD . /timeout_api
-RUN touch .env
+RUN touch /timeout_api/.env

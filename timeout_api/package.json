@@ -15,10 +15,12 @@
     "start": "./bin/server",
     "test": "NODE_ENV=test mocha",
     "coverage": "NODE_ENV=test istanbul cover _mocha",
-    "docker": "docker-compose up timeout_api",
+    "docker": "docker-compose up timeout_api || true",
     "postdocker": "docker-compose down",
     "dockertest": "docker-compose -p test up timeout_api_test",
     "postdockertest": "docker-compose -p test down",
+    "dockercov": "docker-compose -p cover up timeout_cover",
+    "postdockercov": "docker-compose -p cover down",
     "lint": "eslint src test config",
     "precommit": "npm run lint"
   },

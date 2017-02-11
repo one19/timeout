@@ -1,6 +1,8 @@
-import styled from 'styled-components';
+const styled = require('styled-components');
+// TODO: SWITCH BACK TO THIS SHIT WHEN WEBPACK FIXES ITSELF
+// import styled from 'styled-components';
 
-// create a Back component
+// create a default Background component
 const style = {
   'background-color': 'palegoldenrod',
   position: 'absolute',
@@ -8,6 +10,7 @@ const style = {
   bottom: 0,
   width: '100%'
 };
-const DefaultBack = styled.div`${style}`;
 
-export default DefaultBack;
+const AppDefault = styled.default.div`${style}`;
+
+export default AppDefault;

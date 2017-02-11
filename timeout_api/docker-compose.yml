@@ -6,8 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .:/timeout_api
-      - /timeout_api/node_modules
+      - ./coverage:/timeout_api/coverage
     environment:
       JWT_SECRET: Ba(0/\/
       RETHINKDB_URL: rethinkdb://rethinkdb:28015/timeout_api
@@ -28,5 +27,11 @@ services:
   timeout_api_test:
     extends: api
     command: npm test
+    depends_on:
+      - rethinkdb
+
+  timeout_cover:
+    extends: api
+    command: npm run coverage
     depends_on:
       - rethinkdb
