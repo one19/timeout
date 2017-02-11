@@ -19,6 +19,8 @@
     "postdocker": "docker-compose down",
     "dockertest": "docker-compose -p test up timeout_api_test",
     "postdockertest": "docker-compose -p test down",
+    "dockercov": "docker-compose -p cover up timeout_cover",
+    "postdockercov": "docker-compose -p cover down",
     "lint": "eslint src test config",
     "precommit": "npm run lint"
   },
