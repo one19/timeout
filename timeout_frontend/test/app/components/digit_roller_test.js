@@ -33,7 +33,9 @@ describe('<DigitRoller />', () => {
   it('listens to state updates, and renders correctly', () => {
     const wrapper = mount(<DigitRoller min={3} max={6} secondPer={4} />);
     wrapper.setState({ tick: 5, resetAnimation: true });
-    expect(wrapper.find('RollingDigitDefaultStill').length).to.eql(1);
-    expect(wrapper.find('RollingDigitDefaultStill').props().nextValue).to.eql(6);
+
+    expect(wrapper.children().at(0).length).to.eql(1);
+    expect(wrapper.children().at(0).props().children).to.eql(5);
+    expect(wrapper.children().at(0).props().nextValue).to.eql(6);
   });
 });

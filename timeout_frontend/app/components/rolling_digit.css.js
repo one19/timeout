@@ -1,4 +1,5 @@
 import { keyframes } from 'styled-components';
+import React from 'react';
 
 const styled = require('styled-components');
 // TODO: SWITCH BACK TO THIS SHIT WHEN WEBPACK FIXES ITSELF
@@ -47,11 +48,19 @@ const defaultContainer = {
 // anim/s is slower than 1s because it gets re-rendered on the second, and we're
 // resetting the animation anyway with a second re-render with no animation
 // nextValue renders the ::after content with the number next in the cycle
-export const RollingDigitDefault = styled.default.div`${defaultStyle}
+const RollingDigitDefaults = styled.default.div`${defaultStyle}
   animation: ${rollUp} ${props => ((props.secondPerAnim < 1) ? props.secondPerAnim * 1005 : 1005)}ms ease-in-out infinite;
   &::after {
     content: '${props => props.nextValue}';
     display: block;
   }`;
-export const RollingDigitDefaultStill = styled.default.div`${defaultStyle}`;
-export const RollingDigitContainerDefault = styled.default.div`${defaultContainer}`;
+const RollingDigitDefaultStills = styled.default.div`${defaultStyle}`;
+const RollingDigitContainerDefaults = styled.default.div`${defaultContainer}`;
+
+
+// holy shitoly this is getting absurd for fixing the namespacing that
+// the webpack-styled-components mismatch created.
+export const RollingDigitDefault = props => <RollingDigitDefaults name="RollingDigitDefault" {...props} />;
+export const RollingDigitDefaultStill = props => <RollingDigitDefaultStills name="RollingDigitDefaultStill" {...props} />;
+export const RollingDigitContainerDefault = props => <RollingDigitContainerDefaults name="RollingDigitContainerDefault" {...props} />;
+

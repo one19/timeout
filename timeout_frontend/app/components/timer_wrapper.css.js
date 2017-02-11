@@ -1,3 +1,5 @@
+import React from 'react';
+
 const styled = require('styled-components');
 // TODO: SWITCH BACK TO THIS SHIT WHEN WEBPACK FIXES ITSELF
 // import styled from 'styled-components';
@@ -13,4 +15,5 @@ const defaultStyle = {
   'vertical-align': 'middle'
 };
 
-export const TimerWrapperDefault = styled.default.div`${defaultStyle}`;
+const TimerWrapperDefaults = styled.default.div`${defaultStyle}`;
+export const TimerWrapperDefault = props => <TimerWrapperDefaults name="TimerWrapperDefault" {...props} />;
