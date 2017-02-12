@@ -36,8 +36,8 @@ describe('<RollingDigit />', () => {
     expect(wrapper.find('RollingDigitDefault').props().nextValue).to.eql(1);
   });
 
-  it('renders animationless when given resetAnimation prop', () => {
-    const wrapper = shallow(<RollingDigit resetAnimation={true} />);
-    expect(wrapper.find('RollingDigitDefaultStill').length).to.eql(1);
+  it('renders animationless when given Infinity prop', () => {
+    const wrapper = shallow(<RollingDigit secondPerAnim={Infinity} />);
+    expect(wrapper.find('RollingDigitDefault').props().secondPerAnim).to.eql(Infinity);
   });
 });

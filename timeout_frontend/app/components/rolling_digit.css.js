@@ -47,8 +47,8 @@ const defaultContainer = {
 
 // generating animation of block that moves up one digit/s*animProp, forever
 const RollingDigitDefaults = styled.default.div`${defaultStyle}
-  -webkit-animation: ${rollUp} ${props => ((props.secondPerAnim < 1) ? props.secondPerAnim * 1000 : 1000)}ms ease-in-out infinite;
-  animation: ${rollUp} ${props => ((props.secondPerAnim < 1) ? props.secondPerAnim * 1000 : 1000)}ms ease-in-out infinite;
+  -webkit-animation: ${rollUp} ${props => props.secondPerAnim * 1000}ms ease-in-out infinite;
+  animation: ${rollUp} ${props => props.secondPerAnim * 1000}ms ease-in-out infinite;
   -webkit-animation-delay: ${props => props.delay}s;
   animation-delay: ${props => props.delay}s;
   &::after {
