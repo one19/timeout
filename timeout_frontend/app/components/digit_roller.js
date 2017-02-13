@@ -1,43 +1,28 @@
 import React, { Component } from 'react';
 import RollingDigit from './rolling_digit';
 
-class DigitRoller extends Component {
-
+export default class DigitRoller extends Component {
   constructor(props) {
     super(props);
-    const {
-      initDelay,
-      startValue,
-      min
-    } = this.props;
-    this.state = {
-      initDelay,
-      tick: startValue || min,
-      resetAnimation: true
-    };
+    const { startValue, min = 0 } = this.props;
+    this.state = { tick: startValue || min };
+
     this.tick = this.tick.bind(this);
   }
   componentDidMount() {
     if (this.props.secondPer * 1000 > 2147483647) return;
-    this.firstSet = this.state.initDelay || this.props.secondPer;
-    this.timer = setInterval(this.tick, (this.state.initDelay || this.props.secondPer) * 1000);
+    const { initDelay, secondPer } = this.props;
+    this.timer = setInterval(this.tick, (initDelay || secondPer) * 1000);
   }
   componentWillUnmount() {
     clearInterval(this.timer);
   }
   tick() {
-    const {
-      min,
-      max
-    } = this.props;
-    const defaultMin = min || 0;
-    const defaultMax = max || 9;
+    const { min = 0, max = 9 } = this.props;
+    const { tick, alt } = this.state;
 
-    const { tick } = this.state;
-    this.setState({ tick, resetAnimation: false });
-    const value = (tick + 1 > defaultMax) ? defaultMin : tick + 1;
-    // start the animation juuuust before 1 second before when it's supposed to turn
-    setTimeout(() => this.setState({ tick: value, resetAnimation: true }), 950);
+    const value = (tick + 1 > max) ? min : tick + 1;
+    this.setState({ tick: value, alt: !alt });
   }
 
   props: {
@@ -49,34 +34,25 @@ class DigitRoller extends Component {
   };
 
   render() {
-    const {
-      min,
-      max,
-      secondPer
-    } = this.props;
-    const defaultMin = min || 0;
-    const defaultMax = max || 9;
+    const { initDelay, secondPer } = this.props;
+    const safeSecondPer = (secondPer * 1000 > 2147483647) ? Infinity : secondPer;
+    const safeInitDelay = initDelay || Infinity;
 
-    // this is a bit gross. But we need a way to reset the intial timer to the full interval
-    // TODO: fix issue where the component is mounted soon before tick, so it
-    // re-renders every second with a broken looping animation; never
-    // resetting to the right state
-    if (this.firstSet < this.props.secondPer) {
-      this.firstSet = this.props.secondPer;
+    // after the first tick(), set the timer roll to the steady interval
+    if (!this.afterFirst && this.state.alt && this.timer) {
+      this.afterFirst = true;
       clearInterval(this.timer);
       this.timer = setInterval(this.tick, this.props.secondPer * 1000);
     }
 
     return (
       <RollingDigit
-        min={defaultMin}
-        max={defaultMax}
+        min={this.props.min || 0}
+        max={this.props.max || 9}
+        alt={this.state.alt}
         value={this.state.tick}
-        secondPerAnim={secondPer}
-        resetAnimation={this.state.resetAnimation}
+        delay={this.afterFirst ? safeSecondPer - 1 : safeInitDelay - 1}
       />
     );
   }
 }
-
-export default DigitRoller;
