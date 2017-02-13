@@ -38,6 +38,9 @@ describe('<RollingDigit />', () => {
 
   it('renders animationless when given Infinity prop', () => {
     const wrapper = shallow(<RollingDigit secondPerAnim={Infinity} />);
+    const also = shallow(<RollingDigit delay={Infinity} />);
     expect(wrapper.find('RollingDigitDefault').props().secondPerAnim).to.eql(Infinity);
+    // duh, given an infinite delay, the animation should take forever
+    expect(also.find('RollingDigitDefault').props().secondPerAnim).to.eql(Infinity);
   });
 });

@@ -9,13 +9,15 @@ type Props = {
   max: ?number;
   value: ?number;
   secondPerAnim: ?number;
-  delay: ?boolean;
+  delay: ?number;
+  alt: ?boolean;
 };
 
 export default function RollingDigit(props: Props) {
   const {
     min,
     max,
+    alt,
     value,
     secondPerAnim,
     delay
@@ -23,12 +25,14 @@ export default function RollingDigit(props: Props) {
 
   const safeValue = value || min || 0;
   const nextValue = (safeValue + 1 > max) ? min || 0 : safeValue + 1;
+  const safeSpeed = (delay === Infinity) ? Infinity : secondPerAnim || 1;
   return (
     <RollingDigitContainerDefault>
       <RollingDigitDefault
         delay={delay}
         nextValue={nextValue}
-        secondPerAnim={secondPerAnim || 1}
+        secondPerAnim={safeSpeed}
+        alt={alt}
       >
         {safeValue}
       </RollingDigitDefault>

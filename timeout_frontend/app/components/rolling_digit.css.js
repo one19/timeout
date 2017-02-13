@@ -8,20 +8,29 @@ const styled = require('styled-components');
 // TODO make a small setup, and a large. Do it SMART
 
 // TODO: make a prettier bezier up in this ho
-const rollUp = keyframes`
+const rollUp = alt => keyframes`
   0% {
     top: 0;
   }
   16% {
-    top: 0;
+    top: 0${alt ? 0.0001 : 0};
   }
   84% {
     top: -40px;
   }
-  100% {
+  100% { 
     top: -40px;
   }
 `;
+/** WHAT'S GOING ON HERE THEN!?
+*
+* so, the deal is; animations with the same classname dont restart on re-render
+* so, we create two (basically identical) animations with different class names
+* then, we alternate these to get the desired animations _with_ delays intact
+*
+**/
+const one = rollUp();
+const two = rollUp(true);
 
 // create a basic set of style properties for our timer
 const defaultStyle = {
@@ -45,10 +54,14 @@ const defaultContainer = {
   position: 'relative'
 };
 
-// generating animation of block that moves up one digit/s*animProp, forever
+// generating animation of block that moves up one digit/s*animProp once
+// delay: #seconds to delay the animation start
+// nextValue: whatever digit to roll to next
+// secondPerAnim: if you want to slow that roll
+// alt: different className animation to re-render with delays & fresh anim.
 const RollingDigitDefaults = styled.default.div`${defaultStyle}
-  -webkit-animation: ${rollUp} ${props => props.secondPerAnim * 1000}ms ease-in-out infinite;
-  animation: ${rollUp} ${props => props.secondPerAnim * 1000}ms ease-in-out infinite;
+  -webkit-animation: ${props => props.alt ? one : two} ${props => props.secondPerAnim * 1100}ms ease-in-out 1;
+  animation: ${props => props.alt ? one : two} ${props => props.secondPerAnim * 1000}ms ease-in-out 1;
   -webkit-animation-delay: ${props => props.delay}s;
   animation-delay: ${props => props.delay}s;
   &::after {
