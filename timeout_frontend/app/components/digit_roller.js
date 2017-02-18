@@ -18,10 +18,11 @@ export default class DigitRoller extends Component {
     clearInterval(this.timer);
   }
   tick() {
-    const { min = 0, max = 9 } = this.props;
+    const { min = 0, max = 9, reverse } = this.props;
     const { tick, alt } = this.state;
 
-    const value = (tick + 1 > max) ? min : tick + 1;
+    let value = (tick + 1 > max) ? min : tick + 1;
+    if (reverse) value = (tick - 1 < min) ? max : tick - 1;
     this.setState({ tick: value, alt: !alt });
   }
 
@@ -31,10 +32,11 @@ export default class DigitRoller extends Component {
     secondPer: number;
     startValue: ?number;
     initDelay: ?number;
+    reverse: ?boolean;
   };
 
   render() {
-    const { initDelay, secondPer } = this.props;
+    const { initDelay, secondPer, reverse } = this.props;
     const safeSecondPer = (secondPer * 1000 > 2147483647) ? Infinity : secondPer;
     const safeInitDelay = initDelay || Infinity;
 
@@ -52,6 +54,7 @@ export default class DigitRoller extends Component {
         alt={this.state.alt}
         value={this.state.tick}
         delay={this.afterFirst ? safeSecondPer - 1 : safeInitDelay - 1}
+        reverse={reverse}
       />
     );
   }
