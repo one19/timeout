@@ -28,15 +28,16 @@ class YearTimer extends Component {
     const numberHour = safeDate.getHours();
     const numberMinute = safeDate.getMinutes();
     const numberSecond = safeDate.getSeconds();
+    const milliSecond = safeDate.getMilliseconds();
 
     const day = leftPad(numberDay.toString());
     const hour = leftPad(numberHour.toString());
     const minute = leftPad(numberMinute.toString());
     const second = leftPad(numberSecond.toString());
 
-    const secondOffset = 0;
-    const tensecondOffset = 10
-      - second[1];
+    const secondOffset = (0 - milliSecond) / 1000;
+    const tensecondOffset = ((10
+      - second[1]) * 1000 - milliSecond) / 1000;
     const minuteOffset = 60
       - numberSecond;
     const tenminuteOffset = (60 * (10 - minute[1]))
@@ -114,11 +115,13 @@ class YearTimer extends Component {
           secondPer={10 * 60}
           startValue={minute[0]}
           initDelay={tenminuteOffset}
+          reverse
         />
         <DigitRoller
           secondPer={60}
           startValue={minute[1]}
           initDelay={minuteOffset}
+          reverse
         />
         .
         <DigitRoller
@@ -126,11 +129,13 @@ class YearTimer extends Component {
           secondPer={10}
           startValue={second[0]}
           initDelay={tensecondOffset}
+          reverse
         />
         <DigitRoller
           secondPer={1}
           startValue={second[1]}
           initDelay={secondOffset}
+          reverse
         />
       </TimerWrapperDefault>
     );
