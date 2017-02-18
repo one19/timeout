@@ -43,4 +43,14 @@ describe('<RollingDigit />', () => {
     // duh, given an infinite delay, the animation should take forever
     expect(also.find('RollingDigitDefault').props().secondPerAnim).to.eql(Infinity);
   });
+
+  it('will roll in reverse if given the prop', () => {
+    const wrapper = shallow(<RollingDigit min={1} max={3} value={3} reverse />);
+    expect(wrapper.find('RollingDigitDefault').props().nextValue).to.eql(2);
+  });
+
+  it('won\'t roll nextValue below min in reverse', () => {
+    const wrapper = shallow(<RollingDigit min={1} max={3} value={1} reverse />);
+    expect(wrapper.find('RollingDigitDefault').props().nextValue).to.eql(3);
+  });
 });

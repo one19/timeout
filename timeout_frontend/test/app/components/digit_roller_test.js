@@ -78,12 +78,27 @@ describe('<DigitRoller />', () => {
     expect(wrapper.state()).to.eql({ tick: 3, alt: true });
   });
 
+  it('counts in reverse properly, given the prop', () => {
+    const wrapper = mount(<DigitRoller min={3} max={5} secondPer={2} initDelay={0} reverse />);
+    clock.tick(2000);
+    expect(wrapper.state()).to.eql({ tick: 5, alt: true });
+    clock.tick(2000);
+    expect(wrapper.state()).to.eql({ tick: 4, alt: false });
+    clock.tick(2000);
+    expect(wrapper.state()).to.eql({ tick: 3, alt: true });
+  });
+
   it('listens to state updates, and renders correctly', () => {
     const wrapper = mount(<DigitRoller min={3} max={6} secondPer={4} />);
     wrapper.setState({ tick: 5, alt: false });
-
     expect(wrapper.children().at(0).length).to.eql(1);
     expect(wrapper.children().at(0).props().children).to.eql(5);
+    expect(wrapper.children().at(0).props().nextValue).to.eql(6);
+  });
+
+  it('passes the reverse prop to children properly', () => {
+    const wrapper = mount(<DigitRoller min={3} max={6} secondPer={4} reverse />);
+    expect(wrapper.children().at(0).props().children).to.eql(3);
     expect(wrapper.children().at(0).props().nextValue).to.eql(6);
   });
 });
