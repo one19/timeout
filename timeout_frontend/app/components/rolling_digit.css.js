@@ -1,5 +1,5 @@
-import { keyframes } from 'styled-components';
 import React from 'react';
+import { keyframes } from 'styled-components';
 
 const styled = require('styled-components');
 // TODO: SWITCH BACK TO THIS SHIT WHEN WEBPACK FIXES ITSELF
@@ -32,7 +32,7 @@ const one = rollUp();
 const two = rollUp(true);
 
 // create a basic set of style properties for our timer
-const defaultStyle = {
+export const defaultStyle = {
   width: '24px',
   height: '40px',
   padding: '2px 4px',
@@ -44,7 +44,7 @@ const defaultStyle = {
   'vertical-align': 'middle'
 };
 // create a basic set of styles for the container for our rolling digit
-const defaultContainer = {
+export const defaultContainer = {
   overflow: 'hidden',
   width: '28px',
   height: '40px',
@@ -61,8 +61,10 @@ const defaultContainer = {
 * @alt: different className animation to re-render with delays & fresh anim.
 **/
 const RollingDigitDefaults = styled.default.div`${defaultStyle}
-  -webkit-animation: ${props => props.alt ? one : two} ${props => props.secondPerAnim * 1100}ms ease-in-out 1;
-  animation: ${props => props.alt ? one : two} ${props => props.secondPerAnim * 1000}ms ease-in-out 1;
+  -webkit-animation: ${props => props.alt ? one : two}
+    ${props => props.secondPerAnim * 1100}ms ease-in-out 1;
+  animation: ${props => props.alt ? one : two}
+    ${props => props.secondPerAnim * 1000}ms ease-in-out 1;
   -webkit-animation-delay: ${props => props.delay}s;
   animation-delay: ${props => props.delay}s;
   &::after {
@@ -72,7 +74,6 @@ const RollingDigitDefaults = styled.default.div`${defaultStyle}
 const RollingDigitContainerDefaults = styled.default.div`${defaultContainer}`;
 
 
-// holy shitoly this is getting absurd for fixing the namespacing that
-// the webpack-styled-components mismatch created.
+// TODO switch this back when webpack sucks less
 export const RollingDigitDefault = props => <RollingDigitDefaults name="RollingDigitDefault" {...props} />;
 export const RollingDigitContainerDefault = props => <RollingDigitContainerDefaults name="RollingDigitContainerDefault" {...props} />;
