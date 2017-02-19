@@ -9,9 +9,20 @@ const styled = require('styled-components');
 const smoothRollUp = numOfItems => keyframes`
   0% {
     top: 40px;
+    color: rgba(0, 0, 0, 0);
+  }
+  ${50 / numOfItems}% {
+    color: rgba(0, 0, 0, 0);
+  }
+  ${100 / numOfItems}% {
+    color: rgba(0, 0, 0, 1);
+  }
+  ${150 / numOfItems}% {
+    color: rgba(0, 0, 0, 0);
   }
   100% {
     top: -${40 * numOfItems}px;
+    color: rgba(0, 0, 0, 0);
   }
 `;
 
