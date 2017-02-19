@@ -39,7 +39,7 @@ const RollingSmoothDefaults = styled.default.div`${props => Object.assign(
   animation-delay: ${props => props.delay}s;
 `;
 const RollingSmoothContainerDefaults = styled.default.div`${props => Object.assign(defaultContainer,
-  { width: `${24 * props.width}px` }
+  { width: `${28 * props.width}px` }
 )}`;
 
 // TODO switch this back when webpack sucks less

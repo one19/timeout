@@ -129,13 +129,14 @@ class YearTimer extends Component {
           secondPer={10}
           startValue={second[0]}
           initDelay={tensecondOffset}
+          smooth
           reverse
         />
         <DigitRoller
           secondPer={1}
           startValue={second[1]}
           initDelay={secondOffset}
-          reverse
+          smooth
         />
       </TimerWrapperDefault>
     );

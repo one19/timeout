@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RollingDigit from './rolling_digit';
+import RollingSmooth from './rolling_smooth';
 
 export default class DigitRoller extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export default class DigitRoller extends Component {
     this.tick = this.tick.bind(this);
   }
   componentDidMount() {
+    if (this.props.smooth) return;
     if (this.props.secondPer * 1000 > 2147483647) return;
     const { initDelay, secondPer } = this.props;
     this.timer = setInterval(this.tick, (initDelay || secondPer) * 1000);
@@ -33,29 +35,40 @@ export default class DigitRoller extends Component {
     startValue: ?number;
     initDelay: ?number;
     reverse: ?boolean;
+    smooth: ?boolean;
   };
 
   render() {
-    const { initDelay, secondPer, reverse } = this.props;
+    const { initDelay, secondPer, reverse, smooth } = this.props;
     const safeSecondPer = (secondPer * 1000 > 2147483647) ? Infinity : secondPer;
     const safeInitDelay = initDelay || Infinity;
 
     // after the first tick(), set the timer roll to the steady interval
-    if (!this.afterFirst && this.state.alt && this.timer) {
+    if (!this.afterFirst && this.state.alt && this.timer && !smooth) {
       this.afterFirst = true;
       clearInterval(this.timer);
       this.timer = setInterval(this.tick, this.props.secondPer * 1000);
     }
 
     return (
-      <RollingDigit
-        min={this.props.min || 0}
-        max={this.props.max || 9}
-        alt={this.state.alt}
-        value={this.state.tick}
-        delay={this.afterFirst ? safeSecondPer - 1 : safeInitDelay - 1}
-        reverse={reverse}
-      />
+      smooth ?
+        <RollingSmooth
+          min={this.props.min || 0}
+          max={this.props.max || 9}
+          alt={this.state.alt}
+          value={this.state.tick}
+          secondPerAnim={secondPer}
+          delay={initDelay}
+          reverse={reverse}
+        /> :
+        <RollingDigit
+          min={this.props.min || 0}
+          max={this.props.max || 9}
+          alt={this.state.alt}
+          value={this.state.tick}
+          delay={this.afterFirst ? safeSecondPer - 1 : safeInitDelay - 1}
+          reverse={reverse}
+        />
     );
   }
 }

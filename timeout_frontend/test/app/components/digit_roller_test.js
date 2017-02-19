@@ -101,4 +101,28 @@ describe('<DigitRoller />', () => {
     expect(wrapper.children().at(0).props().children).to.eql(3);
     expect(wrapper.children().at(0).props().nextValue).to.eql(6);
   });
+
+  it('can roll smoothly instead', () => {
+    const wrapper = mount(<DigitRoller min={3} secondPer={4} initDelay={0.3} smooth />);
+    expect(wrapper.find('RollingSmoothDefault').length).to.eql(7);
+    expect(wrapper.find('RollingSmoothDefault').at(0).props()).to.eql({
+      children: '3',
+      delay: 0.3,
+      numOfItems: 7,
+      secondPerAnim: 28,
+      width: 1
+    });
+    expect(wrapper.find('RollingSmoothDefault').at(1).props()).to.eql({
+      children: '4',
+      delay: -3.7,
+      numOfItems: 7,
+      secondPerAnim: 28,
+      width: 1
+    });
+  });
+
+  it('can doesn\'t need any timers when smooth', () => {
+    const wrapper = mount(<DigitRoller smooth />);
+    expect(wrapper.find('DigitRoller').root.node.timer).to.eql(undefined);
+  });
 });

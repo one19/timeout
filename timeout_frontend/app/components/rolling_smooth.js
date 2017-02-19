@@ -29,7 +29,7 @@ export default function RollingSmooth(props: Props) {
   const valIndex = defaultDigits.findIndex(e => parseInt(e, 10) === value);
 
   return (
-    <RollingSmoothContainerDefault>
+    <RollingSmoothContainerDefault width={defaultDigits[0].length}>
       {defaultDigits.map((digit, i) =>
         <RollingSmoothDefault
           key={i}
